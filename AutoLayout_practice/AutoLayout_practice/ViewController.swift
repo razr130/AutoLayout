@@ -40,14 +40,65 @@ class ViewController: UIViewController {
         return txtdesc
     }()
     
+    private let BtnPrev: UIButton =  {
+        let btnprev = UIButton(type: .system)
+        btnprev.setTitle("PREV", for: .normal)
+        btnprev.translatesAutoresizingMaskIntoConstraints = false
+        btnprev.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        btnprev.setTitleColor(.gray, for: .normal)
+        return btnprev
+    }()
+    
+    private let BtnNext: UIButton =  {
+        let btnnext = UIButton(type: .system)
+        btnnext.setTitle("NEXT", for: .normal)
+        btnnext.translatesAutoresizingMaskIntoConstraints = false
+        btnnext.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        btnnext.tintColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+        return btnnext
+    }()
+    
+    private let PageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+        pc.pageIndicatorTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        return pc
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
         view.addSubview(TxtTitle)
         view.addSubview(TxtDescription)
         addingsubcontainer()
         SubViewConstraint()
+        setupbottomcontrol()
     
+        
+    }
+    
+    fileprivate func setupbottomcontrol() {
+        
+       
+       
+        
+        let bottomStackView = UIStackView(arrangedSubviews: [BtnPrev, PageControl, BtnNext])
+        bottomStackView.translatesAutoresizingMaskIntoConstraints = false
+        bottomStackView.distribution = .fillEqually
+        view.addSubview(bottomStackView)
+        
+        NSLayoutConstraint.activate([
+            
+            bottomStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            bottomStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            bottomStackView.heightAnchor.constraint(equalToConstant: 50)
+            
+            ])
         
     }
     
